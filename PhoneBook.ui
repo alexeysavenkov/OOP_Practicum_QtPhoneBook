@@ -29,7 +29,7 @@
         </widget>
        </item>
        <item>
-        <widget class="ContactsList" name="listContacts"/>
+        <widget class="EditableStringList" name="listContacts"/>
        </item>
       </layout>
      </widget>
@@ -43,7 +43,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listPhoneNumbers"/>
+        <widget class="EditableStringList" name="listPhoneNumbers"/>
        </item>
       </layout>
      </widget>
@@ -53,9 +53,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ContactsList</class>
+   <class>EditableStringList</class>
    <extends>QListWidget</extends>
-   <header>contactslist.h</header>
+   <header>EditableStringList.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

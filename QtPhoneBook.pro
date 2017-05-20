@@ -15,15 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
     EditableStringList.cpp \
     PhoneBook.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    EditableStringListPlaceholder.cpp
 
 HEADERS  += \
     EditableStringList.h \
     PhoneBook.h \
-    MainWindow.h
+    MainWindow.h \
+    EditableStringListPlaceholder.h
 
 FORMS    += \
-    EditableStringListPlaceholder.ui \
     EditableStringList.ui \
     MainWindow.ui \
-    PhoneBook.ui
+    PhoneBook.ui \
+    EditableStringListPlaceholder.ui
