@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PhoneBook</class>
+ <widget class="QWidget" name="PhoneBook">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QWidget" name="">
+      <layout class="QVBoxLayout" name="layoutContacts">
+       <item>
+        <widget class="QLabel" name="labelContacts">
+         <property name="text">
+          <string>Contacts:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ContactsList" name="listContacts"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <layout class="QVBoxLayout" name="layoutPhoneNumbers">
+       <item>
+        <widget class="QLabel" name="labelPhoneNumbers">
+         <property name="text">
+          <string>Phone numbers:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="listPhoneNumbers"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ContactsList</class>
+   <extends>QListWidget</extends>
+   <header>contactslist.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
