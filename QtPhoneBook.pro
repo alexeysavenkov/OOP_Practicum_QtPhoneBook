@@ -16,16 +16,19 @@ SOURCES += main.cpp\
     EditableStringList.cpp \
     PhoneBook.cpp \
     MainWindow.cpp \
-    EditableStringListPlaceholder.cpp
+    EditableStringListItem.cpp
 
 HEADERS  += \
     EditableStringList.h \
     PhoneBook.h \
     MainWindow.h \
-    EditableStringListPlaceholder.h
+    EditableStringListItem.h
 
 FORMS    += \
     EditableStringList.ui \
     MainWindow.ui \
     PhoneBook.ui \
-    EditableStringListPlaceholder.ui
+    EditableStringListItem.ui
+
+DISTFILES += \
+    iconclose.png

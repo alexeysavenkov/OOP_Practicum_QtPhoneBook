@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QListWidgetItem>
-#include "EditableStringListPlaceholder.h"
+#include "EditableStringListItem.h"
 
 namespace Ui {
 class EditableStringList;
@@ -21,9 +21,9 @@ public:
 private:
     Ui::EditableStringList *ui;
     QString placeholderText;
-    EditableStringListPlaceholder *placeholder;
 
-    QListWidgetItem* generateLabel();
+
+    QListWidgetItem* generateEmptyItem();
 };
 
 #endif // EDITABLESTRINGLIST_H
