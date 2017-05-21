@@ -17,8 +17,20 @@ public:
 
     void setPlaceholderText(const QString& placeholderText);
 
+signals:
+    void focusIn();
+    void textFilled();
+    void textCleared();
+    void removeButtonClicked();
+
+private slots:
+    void onCursorPositionChanged(int, int);
+    void onTextEdited(QString);
+    void onRemoveButtonClicked();
+
 private:
     Ui::EditableStringListItem *ui;
+    QString prevText;
 
     void updateVisibilities();
 };
