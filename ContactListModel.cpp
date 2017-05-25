@@ -14,6 +14,7 @@ void ContactListModel::setStringAt(int index, QString newString) {
 }
 
 void ContactListModel::deleteStringAt(int index) {
+    qDebug() << "Deleteing item " << index << " from vector of size " << this->contacts.size();
     this->contacts.remove(index);
 }
 
@@ -29,6 +30,6 @@ int ContactListModel::count() const {
     return this->contacts.count();
 }
 
-Contact ContactListModel::getContactAt(int index) {
-    return *(this->contacts[index]);
+Contact* ContactListModel::getContactAt(int index) {
+    return this->contacts[index];
 }

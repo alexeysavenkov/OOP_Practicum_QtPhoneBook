@@ -35,5 +35,4 @@ FORMS    += \
     MainWindow.ui \
     PhoneBook.ui
 
-DISTFILES += \
-    iconclose.png
+DISTFILES +=

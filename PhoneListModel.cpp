@@ -1,4 +1,5 @@
 #include "PhoneListModel.h"
+#include <QDebug>
 
 PhoneListModel::PhoneListModel()
 {
@@ -17,6 +18,7 @@ void PhoneListModel::deleteStringAt(int index) {
 }
 
 void PhoneListModel::appendString(QString str) {
+    qDebug() << "asdfasf";
     this->phoneNumbers.append(str);
 }
 

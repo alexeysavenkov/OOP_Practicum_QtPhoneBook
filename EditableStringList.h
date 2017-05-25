@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QListWidgetItem>
+#include <QModelIndex>
 #include "EditableStringListModel.h"
 
 namespace Ui {
@@ -15,7 +16,7 @@ class EditableStringList : public QWidget
 
 public:
     explicit EditableStringList(QWidget *parent = 0);
-    void setPlaceholderText(const QString& text);
+    void setNewItemPlaceholderText(const QString& text);
     ~EditableStringList();
     void setModel(EditableStringListModel*);
 
@@ -26,15 +27,15 @@ private slots:
     void onBtnAddClicked();
 
 signals:
-    void onItemSelect(int index);
+    void onItemSelect(QModelIndex index);
 
 private:
     Ui::EditableStringList *ui;
-    QString placeholderText;
+    QString newItemPlaceholderText;
 
     EditableStringListModel *model;
 
-    QString showInputDialog(QString dialogHeader, QString prompt);
+    QString showInputDialog(QString dialogHeader, QString prompt, QString placeholder);
 };
 
 #endif // EDITABLESTRINGLIST_H

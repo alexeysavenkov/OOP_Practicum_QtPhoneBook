@@ -8,7 +8,7 @@
 EditableStringList::EditableStringList(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EditableStringList),
-    placeholderText("Placeholder not set"),
+    newItemPlaceholderText(""),
     model(0)
 {
     ui->setupUi(this);
@@ -19,8 +19,8 @@ EditableStringList::EditableStringList(QWidget *parent) :
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(onBtnAddClicked()));
 }
 
-void EditableStringList::setPlaceholderText(const QString& text) {
-    placeholderText = text;
+void EditableStringList::setNewItemPlaceholderText(const QString& text) {
+    newItemPlaceholderText = text;
 }
 
 void EditableStringList::onSelectionChanged() {
@@ -30,18 +30,22 @@ void EditableStringList::onSelectionChanged() {
     if(index.isValid()) {
         ui->btnDelete->setEnabled(true);
         ui->btnModify->setEnabled(true);
-
-        emit onItemSelect(index.row());
     } else {
         ui->btnDelete->setEnabled(false);
         ui->btnModify->setEnabled(false);
     }
+
+    emit onItemSelect(index);
 }
 
 void EditableStringList::onItemRemoveClicked() {
     qDebug() << "kak";
-    model->deleteStringAt(ui->listWidget->currentRow());
+    int currentRow = ui->listWidget->currentRow();
     qDeleteAll(ui->listWidget->selectedItems());
+    ui->listWidget->clearSelection();
+    model->deleteStringAt(currentRow);
+    //ui->listWidget->
+    //
 }
 
 void EditableStringList::onItemModifyClicked() {
@@ -51,7 +55,7 @@ void EditableStringList::onItemModifyClicked() {
     int currentRow = ui->listWidget->currentRow();
     QListWidgetItem *listItem = ui->listWidget->item(currentRow);
 
-    QString newItemName = showInputDialog("Change name of '" + listItem->text() + "'", "New item name: ");
+    QString newItemName = showInputDialog("Change '" + listItem->text() + "'", "New item name: ", listItem->text());
 
     if(!newItemName.isEmpty()) {
         listItem->setText(newItemName);
@@ -63,7 +67,7 @@ void EditableStringList::onBtnAddClicked() {
 
     qDebug() << "kak4 ";
 
-    QString newItemName = showInputDialog("Add new item", "New item name: ");
+    QString newItemName = showInputDialog("Add new item", "New item name: ", newItemPlaceholderText);
 
     if(!newItemName.isEmpty()) {
         ui->listWidget->addItem(newItemName);
@@ -73,11 +77,11 @@ void EditableStringList::onBtnAddClicked() {
     }
 }
 
-QString EditableStringList::showInputDialog(QString dialogHeader, QString prompt) {
+QString EditableStringList::showInputDialog(QString dialogHeader, QString prompt, QString placeholder) {
     bool ok;
     QString text = QInputDialog::getText(this, dialogHeader,
                                          prompt, QLineEdit::Normal,
-                                         QDir::home().dirName(), &ok);
+                                         placeholder, &ok);
     if(!ok) {
         return "";
     }

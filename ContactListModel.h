@@ -18,7 +18,7 @@ public:
     virtual void appendString(QString str) override;
     virtual int count() const override;
 
-    Contact getContactAt(int index);
+    Contact* getContactAt(int index);
 };
 
 #endif // CONTACTLISTMODEL_H
