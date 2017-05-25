@@ -2,6 +2,7 @@
 #define PHONEBOOK_H
 
 #include <QWidget>
+#include "ContactListModel.h"
 
 namespace Ui {
 class PhoneBook;
@@ -15,8 +16,13 @@ public:
     explicit PhoneBook(QWidget *parent = 0);
     ~PhoneBook();
 
+private slots:
+    void onContactSelect(int index);
+
 private:
     Ui::PhoneBook *ui;
+
+    ContactListModel contactListModel;
 };
 
 #endif // PHONEBOOK_H
