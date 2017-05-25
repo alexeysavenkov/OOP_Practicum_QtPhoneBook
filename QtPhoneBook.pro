@@ -15,20 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
     EditableStringList.cpp \
     PhoneBook.cpp \
-    MainWindow.cpp \
-    EditableStringListItem.cpp
+    MainWindow.cpp
 
 HEADERS  += \
     EditableStringList.h \
     PhoneBook.h \
-    MainWindow.h \
-    EditableStringListItem.h
+    MainWindow.h
 
 FORMS    += \
     EditableStringList.ui \
     MainWindow.ui \
-    PhoneBook.ui \
-    EditableStringListItem.ui
+    PhoneBook.ui
 
 DISTFILES += \
     iconclose.png

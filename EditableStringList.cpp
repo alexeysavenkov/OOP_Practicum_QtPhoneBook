@@ -1,6 +1,9 @@
 #include "EditableStringList.h"
-#include "EditableStringListItem.h"
 #include "ui_editablestringlist.h"
+#include <QDebug>
+#include <QInputDialog>
+#include <QDir>
+#include <QModelIndex>
 
 EditableStringList::EditableStringList(QWidget *parent) :
     QWidget(parent),
@@ -8,25 +11,72 @@ EditableStringList::EditableStringList(QWidget *parent) :
     placeholderText("Placeholder not set")
 {
     ui->setupUi(this);
-    ui->listWidget->addItem(generateEmptyItem());
+
+    connect(ui->listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(onSelectionChanged()));
+    connect(ui->btnDelete, SIGNAL(clicked()), this, SLOT(onItemRemoveClicked()));
+    connect(ui->btnModify, SIGNAL(clicked()), this, SLOT(onItemModifyClicked()));
+    connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(onBtnAddClicked()));
 }
 
 void EditableStringList::setPlaceholderText(const QString& text) {
     placeholderText = text;
-    for(int i = 0; i < ui->listWidget->count(); i++) {
-        EditableStringListItem *item = (EditableStringListItem*)ui->listWidget->item(i);
-        item->setPlaceholderText(placeholderText);
+}
+
+void EditableStringList::onSelectionChanged() {
+    qDebug() << "kek";
+
+    QModelIndex index = ui->listWidget->currentIndex();
+    if(index.isValid()) {
+        ui->btnDelete->setEnabled(true);
+        ui->btnModify->setEnabled(true);
+    } else {
+        ui->btnDelete->setEnabled(false);
+        ui->btnModify->setEnabled(false);
     }
 }
 
-QListWidgetItem* EditableStringList::generateEmptyItem() {
-    QWidget *placeholder = new EditableStringListItem("", placeholderText, this);
-    QListWidgetItem *listItem = new QListWidgetItem();
-    //listItem->setFlags( listItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable );
-    //listItem->setSizeHint();
-    ui->listWidget->setItemWidget(listItem, placeholder);
-    return listItem;
+void EditableStringList::onItemRemoveClicked() {
+    qDebug() << "kak";
+    qDeleteAll(ui->listWidget->selectedItems());
 }
+
+void EditableStringList::onItemModifyClicked() {
+
+    qDebug() << "kak3 ";
+
+    auto listItem = ui->listWidget->selectedItems().at(0);
+
+    QString newItemName = showInputDialog("Change name of '" + listItem->text() + "'", "New item name: ");
+
+    if(!newItemName.isEmpty()) {
+        listItem->setText(newItemName);
+    }
+}
+
+void EditableStringList::onBtnAddClicked() {
+
+    qDebug() << "kak4 ";
+
+    QString newItem = showInputDialog("Add new item", "New item name: ");
+
+    if(!newItem.isEmpty()) {
+        ui->listWidget->addItem(newItem);
+    }
+}
+
+QString EditableStringList::showInputDialog(QString dialogHeader, QString prompt) {
+    bool ok;
+    QString text = QInputDialog::getText(this, dialogHeader,
+                                         prompt, QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    if(!ok) {
+        return "";
+    }
+
+    return text;
+}
+
+
 
 EditableStringList::~EditableStringList()
 {
